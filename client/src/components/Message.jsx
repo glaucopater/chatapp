@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types' 
 import Moment from 'react-moment';
+import "./Message.css"
 
 function Message (props) {
   const {author, body, timeStamp} = props.message
   //unix timestamp is in seconds, whil js in milliseconds
   const unixTimestamp = timeStamp / 1000
   return (
-  <div>
-    <div>
-    <strong>{author}: </strong>{body}
-    </div>
-    <Moment unix format="DD MMM YYYY HH:MM">{unixTimestamp}</Moment>
-  </div>)
+  <div className="message">
+    <div className="author">{author}</div>
+    <div className="body">{body}</div>
+    <Moment className="timestamp" unix format="DD MMM YYYY HH:MM">{unixTimestamp}</Moment>
+  </div>) 
 }
 
 Message.propTypes = {

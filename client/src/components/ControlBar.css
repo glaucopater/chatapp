@@ -1,0 +1,44 @@
+
+.ControlBar {
+  border: 1px solid #666;
+  padding: 10px 0px;
+  overflow: hidden;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+.ControlBar #username-input {
+  font-size: 1em;
+  margin-left: 10px;
+  width: 180px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid #666;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.ControlBar #others-select {
+  position: relative;
+  top: -1px;
+  font-size: 1em;
+  margin-left: 10px;
+  width: 180px;
+  height: 30px;
+  border: 1px solid #666;
+  border-radius: 4px;
+}
+
+.ControlBar button {
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0 20px;
+  margin-left: 10px;
+  height: 30px;
+}
+
+
+.ControlBar label {
+    padding: 5px;
+}
