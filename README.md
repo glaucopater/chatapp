@@ -52,9 +52,3 @@ This will startup a React development server at `http://localhost:3000`.
 **3. Visit `http://localhost:3000` in your browser to view the application.**
 
 **4. Edit away! The app will automatically reload as you make changes.**
-
-
-## Attributions
-
-"Happy Cat" icon by Erika Jasso, from her [_Cat Collection_](https://thenounproject.com/kikajasso/collection/cat/)
-@ the Noun Project

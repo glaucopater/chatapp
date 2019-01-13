@@ -43,7 +43,7 @@ class Conversations extends Component {
   }
 }
 
-Conversations.PropTypes = {
+Conversations.propTypes = {
   activeUsers: PropTypes.arrayOf(PropTypes.string),
   username: PropTypes.string,
   rooms: PropTypes.arrayOf(PropTypes.string),

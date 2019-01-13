@@ -14,7 +14,7 @@ function Message (props) {
   </div>)
 }
 
-Message.PropTypes = {
+Message.propTypes = {
   message: PropTypes.shape({
     author: PropTypes.string,
     body: PropTypes.string,

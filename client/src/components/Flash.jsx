@@ -7,7 +7,7 @@ class Flash extends Component {
   }
 }
 
-Flash.PropTypes = {
+Flash.propTypes = {
   notice: PropTypes.string
 }
 
