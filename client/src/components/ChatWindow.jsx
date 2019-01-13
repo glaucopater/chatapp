@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Message from './Message'
-import "./ChatWindow.css"
+import "./ChatWindow.scss"
 
 class ChatWindow extends Component {
   constructor (props) {

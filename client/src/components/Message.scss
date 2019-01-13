@@ -1,0 +1,31 @@
+@import "../variables.scss";
+
+.message {
+  color: grey;
+  margin: 3 * $offsetWidth 0 10px 0;
+}
+
+.author {
+  color:  $lightgray;
+  margin-bottom: $offsetWidth;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.personal {
+  border: 1px solid  $lightgray;
+  border-radius: $offsetWidth;
+  padding: 3 * $offsetWidth;
+}
+
+.body { 
+  font-weight: 500;
+  text-transform: capitalize;
+  margin-bottom: $offsetWidth; 
+}
+
+.timestamp {
+  color: $lightgray; 
+  font-weight: 300;
+  font-size: 14px;
+}

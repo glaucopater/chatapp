@@ -3,7 +3,7 @@ import ControlBar from './components/ControlBar'
 import Conversations from './components/Conversations'
 import Flash from './components/Flash'
 import io from 'socket.io-client' 
-import "./App.css"
+import "./App.scss"
 
 const socket = io('http://localhost:5000')
 
