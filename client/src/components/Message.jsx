@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types' 
 import Moment from 'react-moment';
 import classnames from 'classnames';
-import "./Message.css"
+import "./Message.scss"
 
 function Message (props) {
   const { body, timeStamp} = props.message
