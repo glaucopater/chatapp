@@ -3,7 +3,9 @@ import ControlBar from './components/ControlBar'
 import Conversations from './components/Conversations'
 import Flash from './components/Flash'
 import io from 'socket.io-client' 
-import "./App.scss"
+import './App.scss'
+import { read_cookie, bake_cookie, delete_cookie }  from 'sfcookies'
+import * as constants from './constants'
 
 const socket = io('http://localhost:5000')
 
@@ -34,13 +36,14 @@ class App extends Component {
   }
 
   setUsername (username) { 
-    const oldName = this.state.username
-    if (oldName && oldName !== username) {
-      socket.emit('deactivate_user', { username: oldName })
+    if(username && username !== ""){
+      this.setState({ username }, () => {
+        socket.emit('activate_user', { username: this.state.username },() => {
+          bake_cookie(constants.USERNAME_COOKIE,username)
+        })
+      })
     }
-    this.setState({ username }, () => {
-      socket.emit('activate_user', { username: this.state.username })
-    })
+
   }
 
   loadMessages () {
@@ -81,6 +84,7 @@ class App extends Component {
       if (activeUsers.indexOf(user) === -1 && user !== this.state.username) {
         this.setState({ activeUsers: [...activeUsers, user] }, () => {
           this.createFlash(`${user} is online`)
+          console.log('user_activated',user,this.state.username)
         })
       }
     })
@@ -88,12 +92,16 @@ class App extends Component {
     socket.on('user_deactivated', (data) => {
       const deactivatedUser = data['user']
       const { activeUsers } = this.state
+      console.log(data,activeUsers,deactivatedUser)
       if (activeUsers.indexOf(deactivatedUser) !== -1) {
         this.setState({ activeUsers: activeUsers.filter((user) => {
           return user !== deactivatedUser
-        },()=>{ this.createFlash(deactivatedUser, " offline")})})
+        },() => { 
+          this.createFlash(deactivatedUser, " offline")
+        })})
       }
-      console.log(deactivatedUser," logged out");
+      delete_cookie(constants.USERNAME_COOKIE)
+      console.log(deactivatedUser," logged out")
     })
 
     socket.on('open_room', (data) => {
@@ -120,7 +128,7 @@ class App extends Component {
   }
 
   joinRoom (room, username) {
-    room = room || "TheRoom"
+    room = room || constants.ROOM_NAME 
     console.log("joinRoom:  ", username, " joined ", room);
     if (this.state.rooms.indexOf(room) === -1) {
       this.setState({rooms: [...this.state.rooms, room]}, () => {
@@ -136,7 +144,9 @@ class App extends Component {
   }
 
   deactivateUser (username) { 
-    socket.emit('deactivate_user', { username })
+    socket.emit('deactivate_user', { username },()=>{
+      this.setState({username:''})
+    })
   }
 
   sendMessage (message, room) {
@@ -166,7 +176,21 @@ class App extends Component {
     this.setState({flashNotice: ''})
   }
 
+  login(username) {
+    this.createFlash('successfully logged in')
+    this.setUsername(username)
+    this.joinRoom(null, username)
+  }
+
+  loadUserSession() { 
+    const username = read_cookie(constants.USERNAME_COOKIE)
+    if(typeof username === "string" && username !== ''){
+      this.login(username)
+    }
+  }
+
   componentDidMount () {
+    this.loadUserSession()
     this.loadMessages()
     this.setSocketListeners()
   }
@@ -181,11 +205,15 @@ class App extends Component {
         </div>
         <Flash notice={flashNotice} />
         <ControlBar
+          loggedInUsername={username}
           activeUsers={this.state.activeUsers}
           setUsername={this.setUsername}
           deactivateUser={this.deactivateUser}
           createFlash={this.createFlash}
-          joinRoom={this.joinRoom} />
+          joinRoom={this.joinRoom}
+          leaveRoom={this.leaveRoom}
+          login={this.login}
+          />
         <Conversations
           activeUsers={this.state.activeUsers}
           rooms={rooms}

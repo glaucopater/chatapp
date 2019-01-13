@@ -24,6 +24,7 @@ class Conversations extends Component {
       const roomMessages = this.filterMessages(messages, room) 
       const others = this.getOthers(room)
       return (
+        username !== '' ?
         <ChatWindow
           key={i}
           room={room}
@@ -31,7 +32,7 @@ class Conversations extends Component {
           others={others}
           messages={roomMessages}
           leaveRoom={leaveRoom}
-          sendMessage={sendMessage} />
+          sendMessage={sendMessage} /> : null
       )
     })
     return (
