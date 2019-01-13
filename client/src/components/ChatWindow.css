@@ -1,0 +1,41 @@
+.ChatWindow {
+  margin-top: 20px;
+  flex: 100%;
+  border: 1px solid #666;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+.chat-header h2 {
+  margin: 0;
+}
+
+.chat-header button {
+  width: 28px;
+}
+
+.chat-body {
+  border-top: 1px solid #666;
+  height: 200px;
+  padding: 5px 10px;
+  overflow-y: scroll;
+}
+
+.chat-input {
+  border-top: 1px solid #666;
+  padding: 8px 16px;
+  background: grey;
+}
+
+.chat-message {
+  width: 100%;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  font-size: 1em;
+  appearance: none;
+}
