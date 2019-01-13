@@ -26,7 +26,7 @@ class ChatWindow extends Component {
     this.setState({ [name]: value })
   }
 
-  closeWindow (event) {
+  closeWindow () {
     const {room, username} = this.props
     this.props.leaveRoom(room, username)
   }
@@ -44,11 +44,12 @@ class ChatWindow extends Component {
   }
 
   render () {
-    const {messages} = this.props
+    const { username, messages} = this.props
     const messageList = messages.map((message, i) => {
       return (
         <Message
           message={message}
+          username={username}
           key={i} />
       )
     })

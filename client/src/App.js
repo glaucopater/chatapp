@@ -33,8 +33,7 @@ class App extends Component {
     this.setState({ [name]: value })
   }
 
-  setUsername (username) {
-    console.log("setUsername", username)
+  setUsername (username) { 
     const oldName = this.state.username
     if (oldName && oldName !== username) {
       socket.emit('deactivate_user', { username: oldName })

@@ -1,14 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types' 
 import Moment from 'react-moment';
+import classnames from 'classnames';
 import "./Message.css"
 
 function Message (props) {
-  const {author, body, timeStamp} = props.message
+  const { body, timeStamp} = props.message
+  const author = props.message.author === props.username ? "You" : props.message.author
   //unix timestamp is in seconds, whil js in milliseconds
   const unixTimestamp = timeStamp / 1000
+
+  const className = classnames({
+    message: true,
+    personal: author === "You"
+  })  
   return (
-  <div className="message">
+  <div className={className}>
     <div className="author">{author}</div>
     <div className="body">{body}</div>
     <Moment className="timestamp" unix format="DD MMM YYYY HH:MM">{unixTimestamp}</Moment>

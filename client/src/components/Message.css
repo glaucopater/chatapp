@@ -7,10 +7,13 @@
   color: lightgray;
   margin-bottom: 5px;
   font-weight: 300;
+  font-size: 14px;
 }
 
-.personalMessage {
-  color: red;
+.personal {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 15px;
 }
 
 .body { 
@@ -22,4 +25,5 @@
 .timestamp {
   color: lightgray; 
   font-weight: 300;
+  font-size: 14px;
 }
