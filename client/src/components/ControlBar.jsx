@@ -37,8 +37,7 @@ class ControlBar extends Component {
   handleUsernameLogOut (event) {
     event.preventDefault()
     const {username} = this.state
-    if (username) { 
-      console.log(username, "is leaving the chat")
+    if (username) {  
       this.props.deactivateUser(username)
     }
   }

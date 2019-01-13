@@ -21,8 +21,7 @@ class Conversations extends Component {
   render () {
     const {username, rooms, leaveRoom, sendMessage, messages} = this.props
     const chatWindows = rooms.map((room, i) => {
-      const roomMessages = this.filterMessages(messages, room)
-      console.log(this.props);
+      const roomMessages = this.filterMessages(messages, room) 
       const others = this.getOthers(room)
       return (
         <ChatWindow
