@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import * as constants from '../constants'
 import './ControlBar.scss'
 
 class ControlBar extends Component {
@@ -10,35 +11,30 @@ class ControlBar extends Component {
       other: ''
     }
 
-    this.handleUsernameSubmit = this.handleUsernameSubmit.bind(this)
-    this.handleOtherSubmit = this.handleOtherSubmit.bind(this)
+    this.handleUsernameSubmit = this.handleUsernameSubmit.bind(this) 
     this.handleChange = this.handleChange.bind(this)
     this.handleUsernameLogOut = this.handleUsernameLogOut.bind(this)
     
   }
 
-  handleOtherSubmit (event) {
-    event.preventDefault()
-    const {username} = this.state
-    if (username) {
-      this.props.joinRoom(null, username)
-    }
-  }
-
   handleUsernameSubmit (event) {
     event.preventDefault()
     const username = this.state.username
-    if (username) {
+    if(this.props.activeUsers.includes(username)){
+      this.props.createFlash('username already in use')
+    } else if (username!=="") {
       this.props.createFlash('successfully logged in')
       this.props.setUsername(username)
+      this.props.joinRoom(null, username)
     }
   }
 
   handleUsernameLogOut (event) {
     event.preventDefault()
-    const {username} = this.state
+    const username = this.state.username !== '' ? this.state.username : this.props.loggedInUsername
     if (username) {  
-      this.props.deactivateUser(username)
+      this.props.deactivateUser(username) 
+      this.props.leaveRoom(constants.ROOM_NAME, username)
     }
   }
 
@@ -48,47 +44,29 @@ class ControlBar extends Component {
   }
 
   render () {
-    const usersList = this.props.activeUsers.map((user, i) => {
-      return <option key={i} value={user}>{user}</option>
-    })
+    const usernameInput =  this.props.loggedInUsername === "" ? <input
+    id='username-input'
+    name='username'
+    onChange={this.handleChange}
+    type='text' 
+    placeholder='choose a nickname' /> : <div className="loggedInUsername">{this.props.loggedInUsername}</div>
+
+    const loginButton = this.props.loggedInUsername === "" ? <button type='submit'>Join Chat</button> : null
+    const logoutButton = !loginButton ? 
+    <button className="alert" type='button' onClick={this.handleUsernameLogOut}>Logout</button> : null;
+
     return (
       <div className='ControlBar'>
         <div>
           <form onSubmit={this.handleUsernameSubmit}>
             <label>
               <strong>Username:</strong>
-              <input
-                id='username-input'
-                name='username'
-                onChange={this.handleChange}
-                type='text'
-                placeholder='choose a nickname' />
+              {usernameInput}
             </label>
-            <button type='submit'>Login</button>
-            <button className="alert" type='button' onClick={this.handleUsernameLogOut}>Logout</button>
+            {loginButton}
+            {logoutButton} 
           </form>
         </div>
-        <div> 
-          <form onSubmit={this.handleOtherSubmit}>
-            <div>
-              <label>
-                <strong>Online users:</strong>
-                <select
-                  id='others-select'
-                  name='others'
-                  onChange={this.handleChange}
-                  value={this.state.other}>
-                  {this.props.activeUsers.length > 0
-                    ? <option value=''>Select a user...</option>
-                    : <option value=''>Waiting for the others...</option>
-                  }
-                  {usersList}
-                </select>
-              </label>
-              <button type='submit'>Join Room</button>
-            </div>
-          </form>
-          </div>
       </div>
     )
   }

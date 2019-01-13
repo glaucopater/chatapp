@@ -8,8 +8,7 @@ class ChatWindow extends Component {
     super(props)
     this.state = { message: '' }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.closeWindow = this.closeWindow.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this) 
     this.scrollToBottom = this.scrollToBottom.bind(this)
   }
 
@@ -24,11 +23,6 @@ class ChatWindow extends Component {
   handleChange (event) {
     const {name, value} = event.target
     this.setState({ [name]: value })
-  }
-
-  closeWindow () {
-    const {room, username} = this.props
-    this.props.leaveRoom(room, username)
   }
 
   scrollToBottom () {
@@ -56,8 +50,7 @@ class ChatWindow extends Component {
     return (
       <div className='ChatWindow'>
         <div className='chat-header'>
-          <h2>{this.props.room}</h2>
-          <button className="alert" alt="leave the chat" onClick={this.closeWindow}>X</button>
+          <h2>{this.props.room}</h2> 
         </div>
         <div className='chat-body' ref={(el) => { this.messageWindow = el }}>
           {messageList}

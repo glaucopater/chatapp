@@ -43,3 +43,8 @@
 .ControlBar label {
     padding: $offsetWidth;
 }
+
+.loggedInUsername {
+  display: inline;
+  padding: $offsetWidth;
+}
