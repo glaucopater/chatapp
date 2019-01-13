@@ -4,7 +4,8 @@ import Moment from 'react-moment';
 
 function Message (props) {
   const {author, body, timeStamp} = props.message
-  const unixTimestamp = timeStamp
+  //unix timestamp is in seconds, whil js in milliseconds
+  const unixTimestamp = timeStamp / 1000
   return (
   <div>
     <div>
