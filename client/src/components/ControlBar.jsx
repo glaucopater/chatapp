@@ -28,7 +28,7 @@ class ControlBar extends Component {
     event.preventDefault()
     const username = this.state.username
     if (username) {
-      this.props.createFlash('successfully registered')
+      this.props.createFlash('successfully logged in')
       this.props.setUsername(username)
     }
   }
@@ -94,7 +94,7 @@ class ControlBar extends Component {
   }
 }
 
-ControlBar.PropTypes = {
+ControlBar.propTypes = {
   joinRoom: PropTypes.func,
   activeUsers: PropTypes.arrayOf(PropTypes.string),
   setUsername: PropTypes.func,

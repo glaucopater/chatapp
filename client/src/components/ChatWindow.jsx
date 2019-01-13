@@ -77,7 +77,7 @@ class ChatWindow extends Component {
   }
 }
 
-ChatWindow.PropTypes = {
+ChatWindow.propTypes = {
   username: PropTypes.string,
   others: PropTypes.arrayOf(PropTypes.string),
   room: PropTypes.string,
