@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__, static_folder='../../client/build/static')
 app.config['SECRET_KEY'] = 'development key'
 socket = SocketIO(app)
-CORS(app)
+CORS(app,resources={r"/*":{"origins":"*"}})
 
 
 @app.route('/')
