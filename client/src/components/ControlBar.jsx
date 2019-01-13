@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import './ControlBar.css'
 
 class ControlBar extends Component {
   constructor (props) {
@@ -53,42 +54,42 @@ class ControlBar extends Component {
     })
     return (
       <div className='ControlBar'>
-
-        <form onSubmit={this.handleUsernameSubmit}>
-          <label>
-            <strong>Username:</strong>
-            <input
-              id='username-input'
-              name='username'
-              onChange={this.handleChange}
-              type='text'
-              placeholder='e.g. evmo' />
-          </label>
-          <button type='submit'>Login</button>
-          <button type='button' onClick={this.handleUsernameLogOut}>LogOut</button>
-        </form>
-
-<div>
-        <form onSubmit={this.handleOtherSubmit}>
-          <div>
+        <div>
+          <form onSubmit={this.handleUsernameSubmit}>
             <label>
-              <strong>Online users:</strong>
-              <select
-                id='partner-select'
-                name='partner'
+              <strong>Username:</strong>
+              <input
+                id='username-input'
+                name='username'
                 onChange={this.handleChange}
-                value={this.state.partner}>
-                {this.props.activeUsers.length > 0
-                  ? <option value=''>Select a user...</option>
-                  : <option value=''>Waiting for the others...</option>
-                }
-                {usersList}
-              </select>
+                type='text'
+                placeholder='choose a nickname' />
             </label>
-            <button type='submit'>Join Room</button>
-          </div>
-        </form>
+            <button type='submit'>Login</button>
+            <button className="alert" type='button' onClick={this.handleUsernameLogOut}>Logout</button>
+          </form>
         </div>
+        <div> 
+          <form onSubmit={this.handleOtherSubmit}>
+            <div>
+              <label>
+                <strong>Online users:</strong>
+                <select
+                  id='others-select'
+                  name='others'
+                  onChange={this.handleChange}
+                  value={this.state.other}>
+                  {this.props.activeUsers.length > 0
+                    ? <option value=''>Select a user...</option>
+                    : <option value=''>Waiting for the others...</option>
+                  }
+                  {usersList}
+                </select>
+              </label>
+              <button type='submit'>Join Room</button>
+            </div>
+          </form>
+          </div>
       </div>
     )
   }

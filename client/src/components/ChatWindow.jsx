@@ -44,7 +44,7 @@ class ChatWindow extends Component {
   }
 
   render () {
-    const {others, messages} = this.props
+    const {messages} = this.props
     const messageList = messages.map((message, i) => {
       return (
         <Message
@@ -55,8 +55,8 @@ class ChatWindow extends Component {
     return (
       <div className='ChatWindow'>
         <div className='chat-header'>
-          <h2>{this.props.room + ":" + others.join(",")}</h2>
-          <button onClick={this.closeWindow}>X</button>
+          <h2>{this.props.room}</h2>
+          <button className="alert" alt="leave the chat" onClick={this.closeWindow}>X</button>
         </div>
         <div className='chat-body' ref={(el) => { this.messageWindow = el }}>
           {messageList}
@@ -67,9 +67,10 @@ class ChatWindow extends Component {
               type='text'
               name='message'
               className='chat-message'
-              placeholder='your message here...'
+              placeholder='write your message here...'
               value={this.state.message}
               onChange={this.handleChange} />
+            <button className="button-send" type="submit">Send</button>
           </form>
         </div>
       </div>

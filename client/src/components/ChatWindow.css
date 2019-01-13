@@ -2,25 +2,26 @@
   margin-top: 20px;
   flex: 100%;
   border: 1px solid #666;
-  border-radius: 4px;
   overflow: hidden;
+  max-width: 500px;
 }
 
 .chat-header {
   display: flex;
   justify-content: space-between;
   padding: 5px 10px;
+  border-bottom: 1px solid; 
 }
+
 .chat-header h2 {
   margin: 0;
 }
 
 .chat-header button {
-  width: 28px;
+  width: 30px;
 }
 
-.chat-body {
-  border-top: 1px solid #666;
+.chat-body { 
   height: 200px;
   padding: 5px 10px;
   overflow-y: scroll;
@@ -28,14 +29,51 @@
 
 .chat-input {
   border-top: 1px solid #666;
-  padding: 8px 16px;
-  background: grey;
+  padding: 5px 15px;
+  background: lightgray;
+}
+
+.chat-input form {
+  background: lightgray;
 }
 
 .chat-message {
-  width: 100%;
+  width: 80%;
   border: 1px solid transparent;
-  padding: 5px 10px;
+  padding: 10px;
   font-size: 1em;
   appearance: none;
+  outline-color: transparent;
 }
+
+.button-send {
+  width: 20%;
+  border: none;
+  background: transparent; 
+  font-weight: 700
+}
+.button-send:hover {
+  background-color: transparent;
+  color: #18d084;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #666;
+  padding: 0 10px;
+  border-radius: 4px;
+  transition: all .3s ease;
+}
+
+button:hover {
+  background-color: #18d084;
+  color: #fff;
+  border-color: #18d084;
+}
+
+button.alert:hover {
+  background-color: crimson; 
+} 
+
+

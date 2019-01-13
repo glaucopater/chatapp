@@ -5,26 +5,7 @@
   background-color: #fdfdfd;
   outline-color: #18D084;
 }
-
-.App {
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-button {
-  cursor: pointer;
-  background: transparent;
-  border: 1px solid #666;
-  padding: 0 10px;
-  border-radius: 4px;
-  transition: all .3s ease;
-}
-
-button:hover {
-  background-color: rgb(87, 64, 255);
-  color: #fff;
-  border-color: rgb(87, 64, 255);
-}
+ 
 
 .header {
   display: flex;
@@ -60,46 +41,6 @@ button:hover {
 
 ::placeholder {
   color: #b2b2b2
-}
-
-.ControlBar {
-  border: 1px solid #666;
-  padding: 10px 0px;
-  overflow: hidden;
-  border-radius: 4px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.ControlBar #username-input {
-  font-size: 1em;
-  margin-left: 10px;
-  width: 180px;
-  height: 30px;
-  background-color: transparent;
-  border: 1px solid #666;
-  padding: 4px;
-  border-radius: 4px;
-}
-
-.ControlBar #partner-select {
-  position: relative;
-  top: -1px;
-  font-size: 1em;
-  margin-left: 10px;
-  width: 180px;
-  height: 30px;
-  border: 1px solid #666;
-  border-radius: 4px;
-}
-
-.ControlBar button {
-  font-size: 1em;
-  font-weight: bold;
-  padding: 0 20px;
-  margin-left: 10px;
-  height: 30px;
 }
 
 .Conversations {
