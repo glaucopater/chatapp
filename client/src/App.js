@@ -7,8 +7,7 @@ import './App.scss'
 import { read_cookie, bake_cookie, delete_cookie }  from 'sfcookies'
 import * as constants from './constants'
 
-const socket = io('http://localhost:5000')
-const API_URL = "http://localhost:5000/message"
+const socket = io(constants.SOCKET_IO_SERVER_URL) 
 
 class App extends Component {
   constructor (props) {
@@ -49,7 +48,7 @@ class App extends Component {
   }
 
   loadMessages () {
-    fetch(API_URL)
+    fetch(constants.API_URL)
       .then(response => response.json())
       .then(data => { 
         const dbMessages = data.map( mex => { return { room: mex.room, author: mex.author, body: mex.body, 
@@ -63,7 +62,7 @@ class App extends Component {
   }
 
   saveMessage(data){
-    fetch(API_URL, {
+    fetch(constants.API_URL, {
       method: 'post',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(data)
