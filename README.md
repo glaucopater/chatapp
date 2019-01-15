@@ -1,6 +1,5 @@
 # ChatApp
-A simple chat application that features a Flask back-end,
-React front-end, and Socket.io.
+A simple chat application that features a Flask back-end with database storage on SqLite3, React on front-end side and Socket.io for communication.
 
 
 ## Easy Start:
