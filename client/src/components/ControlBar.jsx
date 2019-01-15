@@ -61,8 +61,8 @@ class ControlBar extends Component {
           <form onSubmit={this.handleUsernameSubmit}>
             <label>
               <strong>Username:</strong>
-              {usernameInput}
             </label>
+            {usernameInput}
             {loginButton}
             {logoutButton} 
           </form>

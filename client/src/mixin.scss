@@ -1,0 +1,39 @@
+@mixin respondto($media...) {
+	@each $screensize in $media {
+		@if $screensize == xs {
+			@media (max-width: $screen-xs-max) {
+				@content;
+			}
+		}
+		@else if $screensize == ph {
+			@media (min-width: $screen-ph-min) and (max-width: $screen-ph-max) {
+				@content;
+			}
+		}
+		@else if $screensize == sm {
+			@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+				@content;
+			}
+		}
+		@else if $screensize == md {
+			@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+				@content;
+			}
+		}
+		@else if $screensize == lg {
+			@media (min-width: $screen-lg-min) and (max-width: $screen-lg-max) {
+				@content;
+			}
+		}
+		@else if $screensize == xl {
+			@media (min-width: $screen-xl-min) {
+				@content;
+			}
+		}
+		@else if $screensize == xl-min {
+			@media (width: $screen-xl-min) {
+				@content;
+			}
+		}
+	}
+}

@@ -3,3 +3,29 @@ $lightgray: lightgray;
 $darkgray: darkgray;
 $active-button: #18d084;
 $alert-button: crimson;
+
+$media: (xs, ph, sm, md, lg, xl);
+
+// Extra small / ref: iPhone 6 (375px - 414px)
+$screen-xs-min: 0 !default;
+$screen-xs-max: 480px !default;
+
+// Big mobile - phablet / ref: iPhone 8 plus (481px - 767px)
+$screen-ph-min: 481px !default;
+$screen-ph-max: 767px !default;
+
+// Small screen / ref: iPad portrait (768px)
+$screen-sm-min: 768px !default;
+$screen-sm-max: 900px !default;
+
+// Medium screen / ref: iPad landscape(1024px)
+$screen-md-min: 901px !default;
+$screen-md-max: 1024px !default;
+
+// Large screen
+$screen-lg-min: 1025px !default;
+$screen-lg-max: 1280px !default;
+
+// Extra large screen
+$screen-xl-min: 1281px !default;
+$screen-xl-max: 100% !default;
