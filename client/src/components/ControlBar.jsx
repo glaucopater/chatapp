@@ -45,22 +45,22 @@ class ControlBar extends Component {
 
   render () {
     const usernameInput =  this.props.loggedInUsername === "" ? <input
-    id='username-input'
+    className='username-input'
     name='username'
     onChange={this.handleChange}
     type='text' 
-    placeholder='choose a nickname' /> : <div className="loggedInUsername">{this.props.loggedInUsername}</div>
+    placeholder='choose a nickname' /> : <div className="loggedin-username">{this.props.loggedInUsername}</div>
 
-    const loginButton = this.props.loggedInUsername === "" ? <button type='submit'>Join Chat</button> : null
+    const loginButton = this.props.loggedInUsername === "" ? <button className="button login" type='submit'>Join Chat</button> : null
     const logoutButton = !loginButton ? 
-    <button className="alert" type='button' onClick={this.handleUsernameLogOut}>Logout</button> : null;
+    <button className="button logout" type='button' onClick={this.handleUsernameLogOut}>Logout</button> : null;
 
     return (
-      <div className='ControlBar'>
+      <div >
         <div>
-          <form onSubmit={this.handleUsernameSubmit}>
+          <form onSubmit={this.handleUsernameSubmit} className='ControlBar'>
             <label>
-              <strong>Username:</strong>
+              <strong>Username</strong>
             </label>
             {usernameInput}
             {loginButton}

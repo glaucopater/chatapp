@@ -1,6 +1,9 @@
 MANIFEST.in
 server/__init__.py
+server/database.py
+server/messages_database.py
 server/server.py
+server/setup_database.py
 server.egg-info/PKG-INFO
 server.egg-info/SOURCES.txt
 server.egg-info/dependency_links.txt

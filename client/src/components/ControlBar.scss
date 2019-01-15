@@ -3,60 +3,53 @@
 
 .ControlBar {
   border: 1px solid $darkgray;
-  padding: 2 * $offsetWidth 0px;
+  padding: 2 * $offsetWidth;
   overflow: hidden;
   border-radius: $offsetWidth;
   display: flex;
-  flex-wrap: wrap; 
-}
-
-.ControlBar #username-input {
-  font-size: 1em;
-  margin-left: 2 * $offsetWidth;
-  width: 180px;
-  height: 6 * $offsetWidth;
-  background-color: transparent;
-  border: 1px solid $darkgray;
-  padding: $offsetWidth;
-  border-radius: $offsetWidth;
-  @include respondto(xs){
-    width: 100%;
-    margin: $offsetWidth;
-  }
-}
-
-.ControlBar #others-select {
-  position: relative;
-  top: -1px;
-  font-size: 1em;
-  margin-left: 2 * $offsetWidth;
-  width: 180px;
-  height: 6 * $offsetWidth;
-  border: 1px solid #666;
-  border-radius: $offsetWidth;
-}
-
-.ControlBar button {
-  font-size: 1em;
-  font-weight: bold;
-  padding: 0 4 * $offsetWidth;
-  margin-left: 2 * $offsetWidth;
-  height: 6 * $offsetWidth;
-  @include respondto(xs){
-    width: 100%;
-    margin: $offsetWidth;
-  }
-}
-
-
-.ControlBar label {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  .loggedin-username {
+    display: inline;
     padding: $offsetWidth;
-    @include respondto(xs){
-      width: 100%; 
+    flex-grow: 2;
+  }
+  .username-input {
+    font-size: 1em;
+    width: 36 * $offsetWidth;
+    height: 6 * $offsetWidth;
+    background-color: transparent;
+    border: 1px solid $darkgray;
+    padding: $offsetWidth;
+    border-radius: $offsetWidth;
+    flex-grow: 2;
+    margin: $offsetWidth;
+    @include respondto(xs) {
+      width: 100%;
+      justify-content: center;
+      margin: $offsetWidth 0;
     }
-}
-
-.loggedInUsername {
-  display: inline;
-  padding: $offsetWidth;
+    .logout {
+      color: $logout-button;
+    }
+  }
+  .button {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0 4 * $offsetWidth;
+    height: 6 * $offsetWidth;
+    flex-grow: 1;
+    @include respondto(xs) {
+      width: 100%;
+      justify-content: center;
+      margin: $offsetWidth 0;
+    }
+  }
+  .label {
+    padding: $offsetWidth;
+    @include respondto(xs) {
+      width: 100%;
+    }
+  }
 }

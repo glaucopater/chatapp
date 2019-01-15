@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   padding: $offsetWidth 2 * $offsetWidth;
-  border-bottom: 1px solid; 
+  border-bottom: 1px solid;
 }
 
 .chat-header h2 {
@@ -24,14 +24,14 @@
   width: 6 * $offsetWidth;
 }
 
-.chat-body { 
+.chat-body {
   height: 200px;
   padding: $offsetWidth 2 * $offsetWidth;
   overflow-y: scroll;
 }
 
 .chat-input {
-  border-top: 1px solid #666;
+  border-top: 1px solid $darkgray;
   padding: $offsetWidth 3 * $offsetWidth;
   background: $lightgray;
 }
@@ -52,8 +52,8 @@
 .button-send {
   width: 20%;
   border: none;
-  background: transparent; 
-  font-weight: 700
+  background: transparent;
+  font-weight: 700;
 }
 .button-send:hover {
   background-color: transparent;
@@ -66,17 +66,11 @@ button {
   border: 1px solid $darkgray;
   padding: 0 2 * $offsetWidth;
   border-radius: $offsetWidth;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
-button:hover {
+.button:hover {
   background-color: $active-button;
   color: #fff;
   border-color: $active-button;
 }
-
-button.alert:hover {
-  background-color: $alert-button; 
-} 
-
-
