@@ -56,7 +56,6 @@ class App extends Component {
           timeStamp: new Date(mex.timeStamp).getTime() }}) 
         if (dbMessages) {
           this.setState({ messages: dbMessages || [] })
-          console.log(dbMessages)
         }
       }).catch(function(error) {
         console.warn("Cannot fetch messages from server");
@@ -71,8 +70,6 @@ class App extends Component {
     }).catch(function(error) {
       console.warn("Cannot save last message");
     })
-
-    console.log("saveMessage", data)
   }
 
   setSocketListeners () {
@@ -89,10 +86,6 @@ class App extends Component {
       })
     })
 
-    socket.on('message_broadcasted', (message) => {
-      console.log("message_broadcasted from server", message)
-    })
-
     socket.on('retrieve_active_users', () => {
       if (this.state.username) {
         socket.emit('activate_user', { username: this.state.username })
@@ -105,7 +98,6 @@ class App extends Component {
       if (activeUsers.indexOf(user) === -1 && user !== this.state.username) {
         this.setState({ activeUsers: [...activeUsers, user] }, () => {
           this.createFlash(`${user} is online`)
-          console.log('user_activated',user,this.state.username)
         })
       }
     })
@@ -113,7 +105,6 @@ class App extends Component {
     socket.on('user_deactivated', (data) => {
       const deactivatedUser = data['user']
       const { activeUsers } = this.state
-      console.log(data,activeUsers,deactivatedUser)
       if (activeUsers.indexOf(deactivatedUser) !== -1) {
         this.setState({ activeUsers: activeUsers.filter((user) => {
           return user !== deactivatedUser
@@ -122,49 +113,29 @@ class App extends Component {
         })})
       }
       delete_cookie(constants.USERNAME_COOKIE)
-      console.log(deactivatedUser," logged out")
     })
 
     socket.on('open_room', (data) => {
       const room = data['room']
       const openRooms = this.state.rooms
-      console.log("data", data)
       const userInRoom = true
       const roomNotOpen = openRooms.indexOf(room) === -1
-      console.log("open_room", room, openRooms, userInRoom)
       if (userInRoom && roomNotOpen) {
         this.joinRoom(room, this.state.username)
-        console.log("joinRoom",this.state.username)
       }
     })
-
-    socket.on('roomJoined', (data) => {
-      console.log("roomJoined ", data, this.state)
-    })
-
-    socket.on('deactivateUser', (data) => {
-      console.log("deactivateUser ", data, this.state)
-    })
- 
-    socket.on('disconnect', () => {
-      console.log('client disconnect...', socket)
-    })
-
     socket.on('connect_error', () => { 
       console.warn('Server disconnect! Retrying to connect...')
       this.setState({ connected: false })
     })
-
     socket.on('connect', () => { 
       console.log('Server connected!') 
       this.setState({ connected: true })
     })
-
   }
 
   joinRoom (room, username) {
-    room = room || constants.ROOM_NAME 
-    console.log("joinRoom:  ", username, " joined ", room);
+    room = room || constants.ROOM_NAME
     if (this.state.rooms.indexOf(room) === -1) {
       this.setState({rooms: [...this.state.rooms, room]}, () => {
         socket.emit('join_room', { username, room })
@@ -174,7 +145,6 @@ class App extends Component {
 
   leaveRoom (room) {
     this.setState({ rooms: this.state.rooms.filter((r) => r !== room) }, () => {
-      console.log("leaveRoom:  ",  this.state.username, " left ", room)
       })
   }
 
@@ -185,7 +155,6 @@ class App extends Component {
   }
 
   sendMessage (message, room) {
-    console.log("sendMessage",message, room)
     const newMessage = {
       room,
       author: this.state.username,
@@ -198,7 +167,6 @@ class App extends Component {
     )
     this.saveMessage(newMessage)
     socket.emit('broadcast_message',{message,room})
-    console.log("broadcast_message",message, room)
   }
 
   createFlash (text) {
