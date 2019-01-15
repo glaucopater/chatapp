@@ -1,4 +1,5 @@
 @import "../variables.scss";
+@import "../mixin.scss";
 
 .ControlBar {
   border: 1px solid $darkgray;
@@ -18,6 +19,10 @@
   border: 1px solid $darkgray;
   padding: $offsetWidth;
   border-radius: $offsetWidth;
+  @include respondto(xs){
+    width: 100%;
+    margin: $offsetWidth;
+  }
 }
 
 .ControlBar #others-select {
@@ -37,11 +42,18 @@
   padding: 0 4 * $offsetWidth;
   margin-left: 2 * $offsetWidth;
   height: 6 * $offsetWidth;
+  @include respondto(xs){
+    width: 100%;
+    margin: $offsetWidth;
+  }
 }
 
 
 .ControlBar label {
     padding: $offsetWidth;
+    @include respondto(xs){
+      width: 100%; 
+    }
 }
 
 .loggedInUsername {
