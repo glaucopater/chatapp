@@ -1,26 +1,15 @@
-from flask import Flask, send_from_directory, request, jsonify
-from flask_socketio import SocketIO, emit, join_room
-from flask_cors import CORS 
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
 import datetime
 
-
+app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
-app = Flask(__name__, static_folder='../../client/build/static')
-app.config['SECRET_KEY'] = 'development key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'messages.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-socket = SocketIO(app)
-CORS(app,resources={r"/*":{"origins":"*"}})
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
-
-@app.route('/')
-def serve_static_index():
-    return send_from_directory('../../client/build/', 'index.html')
-
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -33,7 +22,7 @@ class Message(db.Model):
         self.room = room
         self.author = author
         self.body = body
-        self.timeStamp = datetime.datetime.utcnow()
+        self.timeStamp = datetime.datetime.now()
 
 class MessageSchema(ma.Schema):
     class Meta:
@@ -73,42 +62,5 @@ def message_detail(id):
     message = Message.query.get(id)
     return message_schema.jsonify(user)
 
-@socket.on('connect')
-def on_connect():
-    print('user connected')
-    retrieve_active_users()
-
-
-def retrieve_active_users():
-    emit('retrieve_active_users', broadcast=True)
-
-
-@socket.on('activate_user')
-def on_active_user(data):
-    user = data.get('username')
-    emit('user_activated', {'user': user}, broadcast=True)
-
-
-@socket.on('deactivate_user')
-def on_inactive_user(data):
-    user = data.get('username')
-    emit('user_deactivated', {'user': user}, broadcast=True)
-    print (user, " user_deactivated")
-
-
-@socket.on('join_room')
-def on_join(data):
-    room = data['room']
-    join_room(room)
-    emit('open_room', {'room': room}, broadcast=True)
-    emit('roomJoined', {'room': room}, broadcast=True)
-
-
-@socket.on('send_message')
-def on_chat_sent(data):
-    room = data['room']
-    emit('message_sent', data, room=room)
-
-@socket.on('broadcast_message')
-def test_message(data):
-    emit('message_broadcasted', data, broadcast=True)
+if __name__ == '__main__':
+    app.run(debug=True)
