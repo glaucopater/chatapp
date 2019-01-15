@@ -1,5 +1,7 @@
+@import "./variables.scss";
+
 .App { 
-  max-width: 500px;
+  max-width: $screen-xs-max;
   margin: 0 auto;
 }
 

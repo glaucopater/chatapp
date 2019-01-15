@@ -69,14 +69,8 @@ button {
   transition: all .3s ease;
 }
 
-button:hover {
+.button:hover {
   background-color: $active-button;
   color: #fff;
   border-color: $active-button;
 }
-
-button.alert:hover {
-  background-color: $alert-button; 
-} 
-
-
