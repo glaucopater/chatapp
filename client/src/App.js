@@ -8,6 +8,7 @@ import { read_cookie, bake_cookie, delete_cookie }  from 'sfcookies'
 import * as constants from './constants'
 
 const socket = io('http://localhost:5000')
+const API_URL = "http://localhost:5000/message"
 
 class App extends Component {
   constructor (props) {
@@ -47,10 +48,26 @@ class App extends Component {
   }
 
   loadMessages () {
-    const savedMessages = window.localStorage.getItem('messages')
-    if (savedMessages) {
-      this.setState({ messages: JSON.parse(savedMessages) || [] })
-    }
+    fetch(API_URL)
+      .then(response => response.json())
+      .then(data => { 
+        const dbMessages = data.map( mex => { return { room: mex.room, author: mex.author, body: mex.body, 
+          timeStamp: new Date(mex.timeStamp).getTime() }}) 
+        if (dbMessages) {
+          this.setState({ messages: dbMessages || [] })
+          console.log(dbMessages)
+        }
+      });
+  }
+
+  saveMessage(data){
+    fetch(API_URL, {
+      method: 'post',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    })
+
+    console.log("saveMessage", data)
   }
 
   setSocketListeners () {
@@ -61,7 +78,7 @@ class App extends Component {
     socket.on('message_sent', (message) => {
       const room = message['room']
       this.setState({ messages: [...this.state.messages, message] }, () => {
-        window.localStorage.setItem('messages', JSON.stringify(this.state.messages))
+        //window.localStorage.setItem('messages', JSON.stringify(this.state.messages))
         if (this.state.rooms.indexOf(room) === -1) {
           this.setState({ rooms: [...this.state.rooms, room] })
         }
@@ -151,15 +168,17 @@ class App extends Component {
 
   sendMessage (message, room) {
     console.log("sendMessage",message, room)
+    const newMessage = {
+      room,
+      author: this.state.username,
+      body: message,
+      timeStamp: new Date().getTime() 
+    }
     socket.emit(
       'send_message',
-      {
-        room,
-        author: this.state.username,
-        body: message,
-        timeStamp: Date.now()
-      }
+      newMessage
     )
+    this.saveMessage(newMessage)
     socket.emit('broadcast_message',{message,room})
     console.log("broadcast_message",message, room)
   }
