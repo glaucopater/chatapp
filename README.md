@@ -53,7 +53,7 @@ $ python setup_database.py
 **2. Start the React development server:**
 ```bash
 $ cd client
-$ yarn start
+$ npm start
 ```
 This will startup a React development server at `http://localhost:3000`.
 
