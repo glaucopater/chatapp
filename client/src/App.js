@@ -51,8 +51,13 @@ class App extends Component {
     fetch(constants.API_URL)
       .then(response => response.json())
       .then(data => { 
-        const dbMessages = data.map( mex => { return { room: mex.room, author: mex.author, body: mex.body, 
-          timeStamp: new Date(mex.timeStamp).getTime() }}) 
+        const dbMessages = data.map( mex => { 
+          return { 
+            room: mex.room, 
+            author: mex.author, 
+            body: mex.body, 
+            timeStamp: new Date(mex.timeStamp).getTime() 
+          }}) 
         if (dbMessages) {
           this.setState({ messages: dbMessages || [] })
         }
