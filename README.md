@@ -2,6 +2,8 @@
 ---
 A simple chat application that features a python backend side, React on frontend side and Socket.io for communication.
 
+![ChatApp Demo](/chatapp.jpg)
+
 # Backend
 ---
 The backend side is made in Python with Flask and SqlAlchemy to manage the database (Sqlite3) and a simple api rest for limited CRUD actions.
@@ -26,16 +28,27 @@ It has been tested in desktop and mobile, Windows,Gnu/Linux and Mac. And also ru
 
 
 ## How to Start:
-1. Verify that you have NPM, Python3, and Pip installed.
- 
-**1. Start the Flask server:**
+1. Verify that you have NPM, Python3, and Pip installed (inside the server folder there is a requirements.txt for this)
+
+
+**1. Start the Flask Backend server:**
+
 ```bash
-$ cd server
+$ cd server/server
 $ export FLASK_DEBUG=True
 $ export FLASK_APP=server
 $ flask run
 ```
 This will start up a Flask server at default `http://localhost:5000`.
+
+Database
+---
+There is already a prepared sqlite3 database of messages in order to test, otherwise to create a new fresh database run:
+
+```bash
+$ cd server/server
+$ python setup_database.py
+```
 
 **2. Start the React development server:**
 ```bash
