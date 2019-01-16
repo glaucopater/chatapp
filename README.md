@@ -1,45 +1,41 @@
 # ChatApp
-A simple chat application that features a Flask back-end with database storage on SqLite3, React on front-end side and Socket.io for communication.
+---
+A simple chat application that features a python backend side, React on frontend side and Socket.io for communication.
+
+# Backend
+---
+The backend side is made in Python with Flask and SqlAlchemy to manage the database (Sqlite3) and a simple api rest for limited CRUD actions.
+On the same endpoint is running also the socket io host, this could be moved to another host for scalability.
+
+# Frontend
+---
+In Frontend side a react app, with sass, proptypes and cookie management. The cookie is used to simulate an user session.
+The components are managing a login process, the chatroom and the message and.
+For semplicity at the moment there is only one chatroom, but this can be extended easily.
+Messages are presented as required in chronological order, with distinction for the current user message.
+I have added a check in order to let unique user at once.
+In case of connection error the client is able to render a diffent component.
+
+# Open points / nice to have / proposals
+---
+* Auth token and users stored in the db
+* Https 
+* Client side syncronization: this is anche idea I had during the first commits. In order to simulate a local db I used localStorage. At the same time It can be used to have a small PWA keeping the message for the user when there is no connection.
+
+It has been tested in desktop and mobile, Windows,Gnu/Linux and Mac. And also running in AWS. 
 
 
-## Easy Start:
+## How to Start:
 1. Verify that you have NPM, Python3, and Pip installed.
-2. Execute the `run.sh` script:
-```bash
-$ ./run.sh # from the root of the project
-```
-This will install all dependencies and startup the Flask server.
-Once the server is running, visit `http://localhost:5000` in your
-browser to view the application. The React front-end will be served
-from `client/build`. If you want to work on the source code, see the
-'Development' instructions below.
-
-
-## Development
-### Setup
-
-**1. Install client-side dependencies:**
-```bash
-$ cd client # from the root of the project
-$ npm install
-```
-
-**2. Install server-side dependencies:**
-```bash
-$ cd server # from the root of the project
-$ pip install --editable .
-```
-
-### Editing
-
-**1. Start the Flask server:** _(In another terminal window/tab:)_
+ 
+**1. Start the Flask server:**
 ```bash
 $ cd server
 $ export FLASK_DEBUG=True
 $ export FLASK_APP=server
 $ flask run
 ```
-This will start up a Flask server at `http://localhost:5000`.
+This will start up a Flask server at default `http://localhost:5000`.
 
 **2. Start the React development server:**
 ```bash
@@ -49,5 +45,3 @@ $ yarn start
 This will startup a React development server at `http://localhost:3000`.
 
 **3. Visit `http://localhost:3000` in your browser to view the application.**
-
-**4. Edit away! The app will automatically reload as you make changes.**
