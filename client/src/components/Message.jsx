@@ -7,8 +7,7 @@ import "./Message.scss"
 function Message (props) {
   const { body, timeStamp} = props.message
   const author = props.message.author === props.username ? "You" : props.message.author
-  //unix timestamp is in seconds, whil js in milliseconds
-  const unixTimestamp = timeStamp / 1000
+  const unixTimestamp = timeStamp
 
   const className = classnames({
     message: true,
@@ -18,7 +17,8 @@ function Message (props) {
   <div className={className}>
     <div className="author">{author}</div>
     <div className="body">{body}</div>
-    <Moment className="timestamp" unix format="DD MMM YYYY HH:MM">{unixTimestamp}</Moment>
+    <Moment className="timestamp" format="DD MMM YYYY HH:mm">{unixTimestamp}</Moment> 
+
   </div>) 
 }
 
