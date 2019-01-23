@@ -21,7 +21,6 @@ ma = Marshmallow(app)
 def serve_static_index():
     return send_from_directory('../../client/build/', 'index.html')
 
-
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     room = db.Column(db.String(80))
@@ -43,13 +42,7 @@ class MessageSchema(ma.Schema):
 message_schema = MessageSchema()
 messages_schema = MessageSchema(many=True)
 
-# endpoint to get user detail by id
-@app.route("/user/<id>", methods=["GET"])
-def user_detail(id):
-    user = User.query.get(id)
-    return user_schema.jsonify(user)
-
-# endpoint to create new user
+# endpoint to create new message
 @app.route("/message", methods=["POST"])
 def add_message():
     room = request.json['room']
@@ -60,49 +53,18 @@ def add_message():
     db.session.commit()
     return message_schema.jsonify(new_message)
 
-# endpoint to show all users
+# endpoint to show all messages
 @app.route("/message", methods=["GET"])
 def get_message():
     all_messages = Message.query.all()
     result = messages_schema.dump(all_messages)
     return jsonify(result.data)
 
-# endpoint to get user detail by id
+# endpoint to get message detail by id
 @app.route("/message/<id>", methods=["GET"])
 def message_detail(id):
     message = Message.query.get(id)
-    return message_schema.jsonify(user)
-
-@socket.on('connect')
-def on_connect():
-    print('user connected')
-    retrieve_active_users()
-
-
-def retrieve_active_users():
-    emit('retrieve_active_users', broadcast=True)
-
-
-@socket.on('activate_user')
-def on_active_user(data):
-    user = data.get('username')
-    emit('user_activated', {'user': user}, broadcast=True)
-
-
-@socket.on('deactivate_user')
-def on_inactive_user(data):
-    user = data.get('username')
-    emit('user_deactivated', {'user': user}, broadcast=True)
-    print (user, " user_deactivated")
-
-
-@socket.on('join_room')
-def on_join(data):
-    room = data['room']
-    join_room(room)
-    emit('open_room', {'room': room}, broadcast=True)
-    emit('roomJoined', {'room': room}, broadcast=True)
-
+    return message_schema.jsonify(message)
 
 @socket.on('send_message')
 def on_chat_sent(data):
@@ -112,3 +74,29 @@ def on_chat_sent(data):
 @socket.on('broadcast_message')
 def test_message(data):
     emit('message_broadcasted', data, broadcast=True)
+
+@socket.on('connect')
+def on_connect():
+    print('user connected')
+    retrieve_active_users()
+
+def retrieve_active_users():
+    emit('retrieve_active_users', broadcast=True)
+
+@socket.on('activate_user')
+def on_active_user(data):
+    user = data.get('username')
+    emit('user_activated', {'user': user}, broadcast=True)
+
+@socket.on('deactivate_user')
+def on_inactive_user(data):
+    user = data.get('username')
+    emit('user_deactivated', {'user': user}, broadcast=True)
+    print (user, " user_deactivated")
+
+@socket.on('join_room')
+def on_join(data):
+    room = data['room']
+    join_room(room)
+    emit('open_room', {'room': room}, broadcast=True)
+    emit('roomJoined', {'room': room}, broadcast=True)
