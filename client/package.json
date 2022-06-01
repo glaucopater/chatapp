@@ -10,7 +10,7 @@
     "react-dom": "^16.7.0",
     "react-moment": "^0.8.4",
     "react-scripts": "3.0.0",
-    "set-value": "^3.0.1",
+    "set-value": "^4.0.1",
     "sfcookies": "^1.0.2",
     "socket.io": "^2.2.0"
   },
