@@ -12,7 +12,7 @@
     "react-scripts": "3.0.0",
     "set-value": "^4.0.1",
     "sfcookies": "^1.0.2",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
