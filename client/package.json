@@ -9,7 +9,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-moment": "^0.8.4",
-    "react-scripts": "3.0.0",
+    "react-scripts": "5.0.1",
     "set-value": "^4.0.1",
     "sfcookies": "^1.0.2",
     "socket.io": "^2.2.0"
@@ -31,6 +31,6 @@
   ],
   "devDependencies": {
     "node-sass": "^7.0.0",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^13.2.0"
   }
 }
